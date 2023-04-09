@@ -1,12 +1,12 @@
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "Lato", sans-serif !important;
   background-color: #dbe7e8 !important;
 }
 
 h1 {
-  color: #262626;
-  font-size: 40px;
-  font-weight: 700;
+  color: #262626 !important;
+  font-size: 40px !important;
+  font-weight: 700 !important;
   line-height: 48px;
 }
 
@@ -23,6 +23,10 @@ li {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+}
+
+li:first-letter {
+  text-transform: capitalize;
 }
 
 .weather-app-wrapper {
@@ -69,4 +73,29 @@ li {
 .units a {
   color: #add2d8;
   text-decoration: none;
+}
+
+#humidity {
+  color: #add2d8;
+}
+
+#wind {
+  color: #add2d8;
+}
+
+#updated {
+  font-style: italic;
+  font-size: 12px;
+}
+
+#credits {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center !important;
+  color: #696969;
+}
+
+#credits a {
+  color: #608fa1;
 }
