@@ -63,11 +63,11 @@ li:first-letter {
 
 .units {
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1;
   text-align: right;
-  color: #696969;
   position: relative;
+  color: #add2d8;
 }
 
 .units a {
@@ -116,4 +116,13 @@ li:first-letter {
 #city-input:focus {
   border-color: #608fa1 !important;
   box-shadow: 0 0 0 0.25rem rgb(96 143 161 / 25%) !important;
+}
+
+.weather-temperature .active {
+  color: #696969;
+  cursor: default;
+}
+
+.weather-temperature .active:hover {
+  text-decoration: none;
 }
