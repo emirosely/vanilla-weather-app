@@ -42,6 +42,7 @@ function displayTemperature(response) {
     "src",
     `src/images/${response.data.weather[0].icon}.svg`
   );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 let apiKey = "ca5af28648d86b7925348bb9fb85cd3a";
