@@ -99,3 +99,21 @@ li:first-letter {
 #credits a {
   color: #608fa1;
 }
+
+.search {
+  background: #608fa1 !important;
+  border-color: #608fa1 !important;
+  transition: all 200ms ease !important;
+}
+
+.search:hover {
+  background: #4e7483 !important;
+  border-color: #4e7483 !important;
+  transition: all 200ms ease !important;
+  box-shadow: rgba(37, 39, 89, 0.1) 0px 5px 5px 0;
+}
+
+#city-input:focus {
+  border-color: #608fa1 !important;
+  box-shadow: 0 0 0 0.25rem rgb(96 143 161 / 25%) !important;
+}
