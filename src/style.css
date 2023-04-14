@@ -90,10 +90,11 @@ li:first-letter {
 
 #credits {
   font-weight: 400;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 20px;
-  text-align: center !important;
+  text-align: center;
   color: #696969;
+  display: block;
 }
 
 #credits a {
@@ -130,6 +131,7 @@ li:first-letter {
 .weather-forecast {
   text-align: center;
   font-size: 14px;
+  padding: 20px !important;
 }
 
 .weather-forecast-date {

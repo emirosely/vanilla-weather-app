@@ -23,6 +23,34 @@ function formatDate(timestamp) {
   return `${day}, ${hours}:${minutes}`;
 }
 
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  let days = ["Sat", "Sun", "Mon", "Tue", "Wed"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+      <div class="col">
+        <div class="weather-forecast-date">${day}</div>
+        <img
+          src="https://basmilius.github.io/weather-icons/production/fill/all/overcast-day.svg"
+          alt=""
+          width="50"
+        />
+        <div class="weather-forecast-temperature">
+          <span class="weather-forecast-maximum">14°</span>
+          <span class="weather-forecast-minimum">9°</span>
+        </div>
+      </div>
+    `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function displayTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
@@ -91,3 +119,4 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 search("Dublin");
+displayForecast();
