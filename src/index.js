@@ -23,29 +23,41 @@ function formatDate(timestamp) {
   return `${day}, ${hours}:${minutes}`;
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
 function displayForecast(response) {
+  let forecast = response.data.daily;
+
   let forecastElement = document.querySelector("#forecast");
-  console.log(response.data.daily);
 
   let forecastHTML = `<div class="row">`;
-  let days = ["Sat", "Sun", "Mon", "Tue", "Wed"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        `
       <div class="col">
-        <div class="weather-forecast-date">${day}</div>
+        <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
         <img
-          src="https://basmilius.github.io/weather-icons/production/fill/all/overcast-day.svg"
+          src="src/images/${forecastDay.weather[0].icon}.svg"
           alt=""
           width="50"
         />
         <div class="weather-forecast-temperature">
-          <span class="weather-forecast-maximum">14°</span>
-          <span class="weather-forecast-minimum">9°</span>
+          <span class="weather-forecast-maximum"> 
+          ${Math.round(forecastDay.temp.max)}° </span>
+          <span class="weather-forecast-minimum"> 
+          ${Math.round(forecastDay.temp.min)}° </span>
         </div>
       </div>
     `;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
@@ -53,10 +65,8 @@ function displayForecast(response) {
 }
 
 function getForecast(coordinates) {
-  console.log(coordinates);
   let apiKey = "ca5af28648d86b7925348bb9fb85cd3a";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-  console.log(apiUrl);
   axios.get(apiUrl).then(displayForecast);
 }
 
@@ -96,7 +106,6 @@ function handleSubmit(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#city-input");
   search(cityInputElement.value);
-  console.log(cityInputElement.value);
 }
 
 function displayFahrenheitTemperature(event) {
