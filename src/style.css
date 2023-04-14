@@ -126,3 +126,23 @@ li:first-letter {
 .weather-temperature .active:hover {
   text-decoration: none;
 }
+
+.weather-forecast {
+  text-align: center;
+  font-size: 14px;
+}
+
+.weather-forecast-date {
+  font-weight: 400;
+  color: #696969;
+}
+
+.weather-forecast-maximum {
+  font-weight: 700;
+  color: #608fa1;
+}
+
+.weather-forecast-minimum {
+  font-weight: 300;
+  color: #608fa1;
+}
