@@ -30,11 +30,11 @@ li:first-letter {
 }
 
 .weather-app-wrapper {
-  max-width: 800px;
-  margin: 30px auto;
+  margin: 50px auto !important;
+  max-width: 600px;
 }
 .weather-app {
-  padding: 20px;
+  padding: 40px;
   background: #ffffff;
   border-radius: 20px;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
@@ -43,6 +43,10 @@ li:first-letter {
 
 .overview {
   margin-bottom: 20px;
+}
+
+.weather-temperature {
+  justify-content: flex-end !important;
 }
 
 .weather-temperature img {
@@ -54,11 +58,9 @@ li:first-letter {
 
 .weather-temperature strong {
   font-weight: 700;
-  font-size: 60px;
+  font-size: 50px;
   line-height: 1;
-  text-align: right;
   color: #608fa1;
-  position: relative;
 }
 
 .units {
@@ -67,12 +69,8 @@ li:first-letter {
   line-height: 1;
   text-align: right;
   position: relative;
-  color: #add2d8;
-}
-
-.units a {
-  color: #add2d8;
-  text-decoration: none;
+  color: #608fa1;
+  top: -25px;
 }
 
 #humidity {
