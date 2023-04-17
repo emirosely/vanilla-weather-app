@@ -31,6 +31,13 @@ function formatDay(timestamp) {
   return days[day];
 }
 
+function getForecast(coordinates) {
+  let apiKey = "3430ato0b66ed70b63460bff3d97ad5e";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function displayForecast(response) {
   let forecast = response.data.daily;
 
@@ -38,22 +45,22 @@ function displayForecast(response) {
 
   let forecastHTML = `<div class="row">`;
   forecast.forEach(function (forecastDay, index) {
-    if (index < 5) {
+    if (index > 0 && index < 6) {
       forecastHTML =
         forecastHTML +
         `
       <div class="col">
-        <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
+        <div class="weather-forecast-date">${formatDay(forecastDay.time)}</div>
         <img
-          src="src/images/${forecastDay.weather[0].icon}.svg"
-          alt=""
+          src= "src/images/${forecastDay.condition.icon}.svg"
+          alt="${forecastDay.condition.description}"
           width="50"
         />
         <div class="weather-forecast-temperature">
           <span class="weather-forecast-maximum"> 
-          ${Math.round(forecastDay.temp.max)}° </span>
+          ${Math.round(forecastDay.temperature.maximum)}° </span>
           <span class="weather-forecast-minimum"> 
-          ${Math.round(forecastDay.temp.min)}° </span>
+          ${Math.round(forecastDay.temperature.minimum)}° </span>
         </div>
       </div>
     `;
@@ -64,14 +71,7 @@ function displayForecast(response) {
   forecastElement.innerHTML = forecastHTML;
 }
 
-function getForecast(coordinates) {
-  let apiKey = "ca5af28648d86b7925348bb9fb85cd3a";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayForecast);
-}
-
 function displayTemperature(response) {
-  console.log(response.data);
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
   let descriptionElement = document.querySelector("#description");
@@ -80,27 +80,28 @@ function displayTemperature(response) {
   let dateElement = document.querySelector("#date");
   let iconElement = document.querySelector("#icon");
 
-  celsiusTemperature = response.data.main.temp;
+  celsiusTemperature = response.data.temperature.current;
 
   temperatureElement.innerHTML = `${Math.round(celsiusTemperature)}`;
-  cityElement.innerHTML = response.data.name;
-  descriptionElement.innerHTML = response.data.weather[0].description;
-  humidityElement.innerHTML = `${response.data.main.humidity}%`;
+  cityElement.innerHTML = response.data.city;
+  descriptionElement.innerHTML = response.data.condition.description;
+  humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
   windElement.innerHTML = `${Math.round(response.data.wind.speed)} km/h`;
-  dateElement.innerHTML = formatDate(response.data.dt * 1000);
+  dateElement.innerHTML = formatDate(response.data.time * 1000);
   iconElement.setAttribute(
     "src",
-    `src/images/${response.data.weather[0].icon}.svg`
+    `src/images/${response.data.condition.icon}.svg`
   );
-  iconElement.setAttribute("alt", response.data.weather[0].description);
+  iconElement.setAttribute("alt", response.data.condition.description);
 
-  getForecast(response.data.coord);
+  getForecast(response.data.coordinates);
 }
 
 function search(city) {
-  let apiKey = "ca5af28648d86b7925348bb9fb85cd3a";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city},&appid=${apiKey}&units=metric`;
+  let apiKey = "3430ato0b66ed70b63460bff3d97ad5e";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayTemperature);
+  console.log.apiUrl;
 }
 
 function handleSubmit(event) {
@@ -114,4 +115,4 @@ let celsiusTemperature = null;
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
-search("Dublin");
+search("Dublin,Ireland");
