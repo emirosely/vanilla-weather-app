@@ -146,3 +146,14 @@ li:first-letter {
   font-weight: 300;
   color: #608fa1;
 }
+
+@media (max-width: 575px) {
+  .overview {
+    text-align: center;
+  }
+
+  .weather-temperature {
+    justify-content: center !important;
+    margin-top: 40px;
+  }
+}
